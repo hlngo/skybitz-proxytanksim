@@ -1,0 +1,13 @@
+2017-02-23 14:23:56.609314 Tank 01 filled with 800 gallons.
+2017-02-23 14:24:35.415301 Tank 04 filled with 2500 gallons.
+2017-02-23 14:25:03.003819 Tank 06 filled with 6000 gallons.
+2017-02-23 14:25:25.479922 Tank 07 filled with 2500 gallons.
+2017-02-23 14:25:37.312685 Tank 08 filled with 1000 gallons.
+2017-02-24 16:08:07.287730 Tank 02 filled with 1000 gallons.
+2017-02-27 08:50:53.773708 Tank 07 filled with 3000 gallons.
+2017-02-27 08:52:18.694255 Tank 06 filled with 6000 gallons.
+2017-02-27 08:52:45.300111 Tank 05 filled with 3000 gallons.
+2017-02-27 08:52:49.190968 Tank 08 filled with 3000 gallons.
+2017-02-27 08:53:00.187236 Tank 08 filled with 3000 gallons.
+2017-02-27 08:53:27.587993 Tank 02 filled with 2000 gallons.
+2017-02-27 10:37:41.395777 Tank 04 filled with 50 gallons.
