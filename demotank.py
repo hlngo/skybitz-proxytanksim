@@ -3,14 +3,15 @@
 #Feb 2017
 
 import csv, datetime
+import json
 
 class DemoTank:
     """DemoTank class def"""
 
     def __init__(self):
         self.tanksimnum = 10
-        self.logfilerun = 'run_log.txt'
-        self.logfilefill = 'fill_log.txt'
+        self.logfilerun = 'logs/run_log.txt'
+        self.logfilefill = 'logs/fill_log.txt'
         return
 
     def logrun(self, string):
@@ -36,9 +37,28 @@ class DemoTank:
 
     def writecsvfile(self, listofrows):
         """writecsvfile docstring here"""
+        #TODO: Add code block to jsonify the listofrows and save to json file
+        dictdata = {}
+        for row in listofrows:
+            #dictdata[str(row[0])] = str(row)
+            dictdata[str(row[0])] = []
+            dictdata[str(row[0])].append({
+                'id' : str(row[0]),
+                'amount' : str(row[1]),
+                'key value' : str(row[2]),
+                'tank name' : str(row[3]),
+                'tank capacity' : str(row[4]),
+                'tank units' : str(row[5]),
+                'product' : str(row[6]),
+                'datetime updated' : str(row[7])
+            })
+        with open('simtanks.json', 'w') as jsonobj:
+            json.dump(dictdata, jsonobj, sort_keys=True, indent=4)
+        
+        #previously created code - still working and required
         with open('simtanks.csv', 'w') as csvobj:
             wr = csv.writer(csvobj, quoting=csv.QUOTE_NONE)
-            tankcsvfile = 'tankdat.csv'
+            tankcsvfile = 'data/tankdat.csv'
             headerlist = self.listfromrow(self.readcsv(tankcsvfile), 1)#always read the first row for this one
             wr.writerow(headerlist)
             for item in listofrows:
@@ -72,7 +92,7 @@ class DemoTank:
 
     def simtankcallout(self, integer):
         """updatetank Docstring here"""
-        tankcsvfile = 'tankdat'+str(integer)+'.csv'
+        tankcsvfile = 'data/tankdat'+str(integer)+'.csv'
         pt = self.listfromrow(self.readcsv(tankcsvfile), 1)#always read the first row for tankdat files
         newlevel = int(pt[1]) - int(pt[2])
         if newlevel > 0:
@@ -86,7 +106,7 @@ class DemoTank:
 
     def fillsimtank(self, tanknum, amt):
         """fillsimtank Docstring here"""
-        tankcsvfile = 'tankdat'+str(tanknum)+'.csv'
+        tankcsvfile = 'data/tankdat'+str(tanknum)+'.csv'
         pt = self.listfromrow(self.readcsv(tankcsvfile), 1)#always read the first row for tankdat files
         newtotal = int(pt[1]) + amt
         if newtotal < int(pt[4]):               #if less than tank capacity, else set new amt to capacity
@@ -107,9 +127,8 @@ class DemoTank:
         numofsimtanks = self.tanksimnum
         index = 1
         while(index <= numofsimtanks):
-            simtanklist.append(self.writecsvrow('tankdat'+ str(index) +'.csv', self.simtankcallout(index)))
+            simtanklist.append(self.writecsvrow('data/tankdat'+ str(index) +'.csv', self.simtankcallout(index)))
             index += 1
 
-        #simtanklist.append(writecsvrow('tankdat1.csv', simtankcallout(1)))
         #print(simtanklist)
         return simtanklist
